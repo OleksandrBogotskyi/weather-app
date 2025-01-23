@@ -1,0 +1,13 @@
+@use "../../assets/styles/variables.scss" as v;
+@use "../../assets/styles/mixins.scss" as m;
+
+.navbar {
+  margin-bottom: 31px;
+  padding: 15px;
+  @include m.flex(space-between);
+
+  &__location {
+    font: v.$font-m;
+    color: v.$mainColor;
+  }
+}

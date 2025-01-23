@@ -1,0 +1,9 @@
+@use './variables.scss' as v;
+
+.container {
+  padding: 15px;
+  background: v.$whiteCardGradient;
+  border-radius: 30px;
+  border: 1px solid v.$border;
+  margin-bottom: 30px;
+}
