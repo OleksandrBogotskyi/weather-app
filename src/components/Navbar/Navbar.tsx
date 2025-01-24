@@ -1,13 +1,19 @@
-import SearchBar from '../SearchBar/SearchBar';
-import s from './Navbar.module.scss';
+import SearchBar from "../SearchBar/SearchBar";
+import s from "./Navbar.module.scss";
 
-function NavBar(){
+interface NavBarProps {
+  city: string;
+  country: string;
+  setCity: (city: string) => void;
+}
+
+export default function NavBar({ city, country, setCity }: NavBarProps) {
   return (
     <nav className={s.navbar}>
-        <span className={s.navbar__location}>Vinnitsia , Ukraine</span>
-        <SearchBar />
+      <span className={s.navbar__location}>
+        {city}, {country}
+      </span>
+      <SearchBar setCity={setCity} />
     </nav>
   );
-};
-
-export default NavBar;
+}
