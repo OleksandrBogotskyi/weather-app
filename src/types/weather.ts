@@ -54,5 +54,3 @@ export interface WeatherData {
   city: City;
 }
 
-export type Nullable<T> = T | null;
-

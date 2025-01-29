@@ -1,21 +1,22 @@
-import { useState, FC, ChangeEventHandler, KeyboardEvent } from "react";
+import { useState, FC, KeyboardEvent } from "react";
 import s from "./SearchBar.module.scss";
 import searchIcon from "../../assets/images/searchIcon.svg";
 
 interface SearchBarProps {
-  setCity: (city: string) => void;
+  onChange: (city: string) => void;
+  initialValue?: string;
 }
 
-const SearchBar: FC<SearchBarProps> = ({ setCity }) => {
-  const [inputValue, setInputValue] = useState("");
+const SearchBar: FC<SearchBarProps> = ({ onChange, initialValue = "" }) => {
+  const [inputValue, setInputValue] = useState(initialValue);
 
-  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
   const handleSearch = () => {
-    if (inputValue.trim() !== "") {
-      setCity(inputValue.trim());
+    if (inputValue.trim()) {
+      onChange(inputValue.trim());
       setInputValue("");
     }
   };
@@ -39,7 +40,7 @@ const SearchBar: FC<SearchBarProps> = ({ setCity }) => {
         className={s.searchbar__input}
         placeholder="Search the city"
         value={inputValue}
-        onChange={(e) => handleInputChange(e)} // Using arrow function for onChange
+        onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
     </div>

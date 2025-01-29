@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import s from "./App.module.scss";
 import NavBar from "./components/Navbar/Navbar";
 import { getWeatherByCity } from "./API/weather";
-import { WeatherData, Nullable } from "./types/types";
+import { WeatherData } from "./types/weather";
+import { Nullable } from "./types/narrowTypes";
+import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 
 function App() {
   const [weatherData, setWeatherData] = useState<Nullable<WeatherData>>(null);
@@ -24,29 +26,28 @@ function App() {
     fetchWeather();
   }, [city]);
 
+  const weatherContent = weatherData && weatherData.list && weatherData.list.length > 0 ? (
+    <CurrentWeather weatherData={weatherData} />
+  ) : (
+    !error && <p>Loading weather data...</p>
+  );
+
   return (
     <div className={s.App}>
       <div className={s.App__content}>
         <div className={s.App__container}>
           {weatherData ? (
             <NavBar
+              key={weatherData.city.name}
               city={weatherData.city.name}
               country={weatherData.city.country}
               setCity={setCity}
             />
           ) : (
-            <NavBar city={city} country="..." setCity={setCity} />
+            <NavBar key={city} city={city} country="..." setCity={setCity} />
           )}
           {error && <p>Error fetching weather data: {error.message}</p>}
-          {weatherData && weatherData.list && weatherData.list.length > 0 ? (
-            <div>
-              <h2>Weather in {weatherData.city.name}</h2>
-              <p>Temperature: {weatherData.list[0].main.temp} °C</p>
-              <p>Weather: {weatherData.list[0].weather[0].description}</p>
-            </div>
-          ) : (
-            !error && <p>Loading weather data...</p>
-          )}
+          {weatherContent}
         </div>
       </div>
     </div>

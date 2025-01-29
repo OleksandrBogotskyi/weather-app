@@ -8,12 +8,16 @@ interface NavBarProps {
 }
 
 export default function NavBar({ city, country, setCity }: NavBarProps) {
+  const handleCityChange = (newCity: string) => {
+    setCity(newCity);
+  };
+
   return (
     <nav className={s.navbar}>
       <span className={s.navbar__location}>
         {city}, {country}
       </span>
-      <SearchBar setCity={setCity} />
+      <SearchBar onChange={handleCityChange}/>
     </nav>
   );
 }
