@@ -1,4 +1,4 @@
-import { useState, FC, KeyboardEvent } from "react";
+import { useState, FC, KeyboardEvent, ChangeEvent } from "react";
 import s from "./SearchBar.module.scss";
 import searchIcon from "../../assets/images/searchIcon.svg";
 
@@ -10,7 +10,7 @@ interface SearchBarProps {
 const SearchBar: FC<SearchBarProps> = ({ onChange, initialValue = "" }) => {
   const [inputValue, setInputValue] = useState(initialValue);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
