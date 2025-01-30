@@ -1,3 +1,21 @@
-.container {
-  color: rgb(105, 89, 89);
+@use './assets/styles/mixins.scss' as m;
+@use './assets/styles/variables.scss' as v;
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+  background-color: v.$mainLightColor;
+
+  &__content {
+    max-width: 1440px;
+    margin: 0 auto;
+    height: 100%;
+  }
+
+  &__container {
+    max-width: 1240px;
+    height: 100%;
+    margin: 0 auto;
+  }
+
 }

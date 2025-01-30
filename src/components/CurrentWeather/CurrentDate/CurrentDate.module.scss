@@ -1,0 +1,6 @@
+@use "../../../assets/styles/variables.scss" as v;
+
+.date {
+  font: v.$font-m;
+  color: v.$mainColor;
+}

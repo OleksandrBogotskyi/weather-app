@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: 'https://api.example.com', 
-  timeout: 5000,
+const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+const baseURL = import.meta.env.VITE_WEATHER_API_URL;
+
+const weatherApi = axios.create({
+  baseURL: baseURL,
+  params: {
+    appid: apiKey,
+    units: 'metric',
+  },
 });
 
-export default instance;
+export default weatherApi;

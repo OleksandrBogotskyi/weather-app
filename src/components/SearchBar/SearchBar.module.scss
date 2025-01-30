@@ -1,0 +1,33 @@
+@use "../../assets/styles/variables.scss" as v;
+@use "../../assets/styles/mixins.scss" as m;
+
+.searchbar {
+  width: 360px;
+  height: 50px;
+  position: relative;
+  display: flex;
+
+  &__icon {
+    position: absolute;
+    top:22%;
+    left:4%;
+    @include m.size(28px);
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    padding: 5px 5px 5px 55px;
+    font: v.$font-sm;
+    color: v.$mainColor;
+    background: v.$whiteGradient;
+    border-radius: 30px;
+    border: 1px solid v.$border;
+    outline: none;
+
+    &::placeholder {
+      color: v.$mainColor;
+      opacity: 0.7;
+    }
+  }
+}
