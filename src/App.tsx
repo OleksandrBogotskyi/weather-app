@@ -26,28 +26,24 @@ function App() {
     fetchWeather();
   }, [city]);
 
-  const weatherContent = weatherData && weatherData.list && weatherData.list.length > 0 ? (
-    <CurrentWeather weatherData={weatherData} />
-  ) : (
-    !error && <p>Loading weather data...</p>
-  );
+  const hasWeatherData =
+    weatherData && weatherData.list && weatherData.list.length > 0;
 
   return (
     <div className={s.App}>
       <div className={s.App__content}>
         <div className={s.App__container}>
-          {weatherData ? (
-            <NavBar
-              key={weatherData.city.name}
-              city={weatherData.city.name}
-              country={weatherData.city.country}
-              setCity={setCity}
-            />
-          ) : (
-            <NavBar key={city} city={city} country="..." setCity={setCity} />
-          )}
+          <NavBar
+            city={weatherData?.city.name || city}
+            country={weatherData?.city.country || "UA"}
+            setCity={setCity}
+          />
           {error && <p>Error fetching weather data: {error.message}</p>}
-          {weatherContent}
+          {hasWeatherData ? (
+            <CurrentWeather weatherData={weatherData} />
+          ) : (
+            !error && <p>Loading weather data...</p>
+          )}
         </div>
       </div>
     </div>

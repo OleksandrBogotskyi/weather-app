@@ -1,0 +1,16 @@
+@use '../../../assets/styles/variables.scss' as v;
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  font: 500 16px/25px 'Open Sans';
+
+  &__item {
+    text-align: center;
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: 16px;
+    text-align: center;
+  }
+}
