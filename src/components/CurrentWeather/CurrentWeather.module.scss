@@ -2,7 +2,7 @@
 @use '../../assets/styles/mixins.scss' as m;
 
 .container {
-    @include m.flex(flex-start);
+    @include m.flex(space-between);
     padding: 30px;
 }
 
@@ -17,4 +17,21 @@
     font:400 70px/85px 'Open Sans';
     color: v.$mainColor;
   }
+}
+
+.params {
+  list-style-type: none;
+  padding: 0;
+  color: v.$lightGrey;
+  font: v.$font-sm;
+  min-width: 115px;
+  margin-top: auto;
+
+  &__item:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+.dayPeriods {
+  display: flex;
 }
