@@ -5,6 +5,7 @@ import { getWeatherByCity } from "./API/weather";
 import { WeatherData } from "./types/weather";
 import { Nullable } from "./types/narrowTypes";
 import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
+import FutureDays from "./components/FutureDays/FutureDay/FutureDays";
 
 function App() {
   const [weatherData, setWeatherData] = useState<Nullable<WeatherData>>(null);
@@ -44,6 +45,9 @@ function App() {
           ) : (
             !error && <p>Loading weather data...</p>
           )}
+          <div className={s.App__futureDays}>
+            <FutureDays weatherData={weatherData} />
+          </div>
         </div>
       </div>
     </div>

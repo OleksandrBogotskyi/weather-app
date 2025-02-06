@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './PeriodList.module.scss';
 import { getWeatherIconUrl } from '../../../utils/getWeatherIcon';
+import dayjs from 'dayjs';
 
 interface PeriodListProps {
   list: {
@@ -25,7 +26,7 @@ const PeriodList: React.FC<PeriodListProps> = ({ list }) => {
   } = list;
 
   const smallIconUrl = getWeatherIconUrl(weather[0].icon, false);
-  const time = new Date(dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const time = dayjs.unix(dt).format('HH:mm');
 
   return (
     <ul className={s.list}>

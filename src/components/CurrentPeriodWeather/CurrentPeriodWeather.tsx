@@ -1,23 +1,42 @@
-import React from 'react';
-import PeriodList from './PeriodList/PeriodList';
-import s from './CurrentPeriodWeather.module.scss';
+import React from "react";
+import PeriodList from "./PeriodList/PeriodList";
+import s from "./CurrentPeriodWeather.module.scss";
+
+interface WeatherMain {
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+}
+
+interface WeatherDescription {
+  icon: string;
+  description: string;
+}
+
+interface Wind {
+  speed: number;
+}
+
+interface PeriodListItem {
+  dt: number;
+  main: WeatherMain;
+  weather: WeatherDescription[];
+  wind: Wind;
+}
 
 interface Period {
   name: string;
-  lists: {
-    dt: number;
-    main: {
-      temp: number;
-      feels_like: number;
-      pressure: number;
-      humidity: number;
-    };
-    weather: { icon: string; description: string }[];
-    wind: { speed: number };
-  }[];
+  lists: PeriodListItem[];
 }
 
-const CurrentPeriodWeather: React.FC<{ period: Period }> = ({ period }) => {
+interface CurrentPeriodWeatherProps {
+  period: Period;
+}
+
+const CurrentPeriodWeather: React.FC<CurrentPeriodWeatherProps> = ({
+  period,
+}) => {
   const { name, lists } = period;
 
   return (
@@ -25,10 +44,7 @@ const CurrentPeriodWeather: React.FC<{ period: Period }> = ({ period }) => {
       <span className={s.dayPeriod__header}>{name}</span>
       <div className={s.dayPeriod__columns}>
         {lists.length === 2 ? (
-          <>
-            <PeriodList key={lists[0].dt} list={lists[0]} />
-            <PeriodList key={lists[1].dt} list={lists[1]} />
-          </>
+          lists.map((item) => <PeriodList key={item.dt} list={item} />)
         ) : (
           <p>No Data</p>
         )}

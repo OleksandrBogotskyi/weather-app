@@ -5,6 +5,7 @@
   width: 100%;
   min-height: 100vh;
   background-color: v.$mainLightColor;
+  transition: background-color 0.4s ease-in-out;
 
   &__content {
     max-width: 1640px;
@@ -16,6 +17,12 @@
     max-width: 1440px;
     height: 100%;
     margin: 0 auto;
+  }
+
+  &__futureDays {
+    @include m.flex(space-evenly);
+    flex-wrap: wrap;
+    gap: 30px;
   }
 
 }
