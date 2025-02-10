@@ -4,7 +4,14 @@
 .day {
   font: 400 16px/22px 'Open Sans';
   width: 145px;
-  color: v.$mainColor;
+  
+  &.light {
+    color: v.$mainColor;
+  }
+  
+  &.dark {
+    color: v.$mainLightColor;
+  }
 
   &__date {
     display: flex;

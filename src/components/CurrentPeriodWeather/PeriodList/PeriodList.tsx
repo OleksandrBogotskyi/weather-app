@@ -2,19 +2,10 @@ import React from 'react';
 import s from './PeriodList.module.scss';
 import { getWeatherIconUrl } from '../../../utils/getWeatherIcon';
 import dayjs from 'dayjs';
+import { PeriodListItem } from '../../../types/weather';
 
 interface PeriodListProps {
-  list: {
-    dt: number;
-    main: {
-      temp: number;
-      feels_like: number;
-      pressure: number;
-      humidity: number;
-    };
-    weather: { icon: string; description: string }[];
-    wind: { speed: number };
-  };
+  list: PeriodListItem;
 }
 
 const PeriodList: React.FC<PeriodListProps> = ({ list }) => {

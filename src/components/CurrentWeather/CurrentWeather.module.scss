@@ -15,14 +15,21 @@
 
   &__temperature {
     font:400 70px/85px 'Open Sans';
-    color: v.$mainColor;
+    
+    &.light {
+      color: v.$mainColor;
+    }
+
+    &.dark {
+      color: v.$mainLightColor;
+    }
   }
 }
 
 .params {
   list-style-type: none;
   padding: 0;
-  color: v.$lightGrey;
+  color: v.$border;
   font: v.$font-sm;
   min-width: 115px;
   margin-top: auto;

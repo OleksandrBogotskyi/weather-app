@@ -1,13 +1,15 @@
 import { useState, FC, KeyboardEvent, ChangeEvent } from "react";
 import s from "./SearchBar.module.scss";
 import searchIcon from "../../assets/images/searchIcon.svg";
+import searchIconWhite from "../../assets/images/searchIconWhite.svg";
 
 interface SearchBarProps {
   onChange: (city: string) => void;
   initialValue?: string;
+  theme: "light" | "dark";
 }
 
-const SearchBar: FC<SearchBarProps> = ({ onChange, initialValue = "" }) => {
+const SearchBar: FC<SearchBarProps> = ({ onChange, initialValue = "", theme }) => {
   const [inputValue, setInputValue] = useState(initialValue);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,13 +33,13 @@ const SearchBar: FC<SearchBarProps> = ({ onChange, initialValue = "" }) => {
     <div className={s.searchbar}>
       <img
         className={s.searchbar__icon}
-        src={searchIcon}
+        src={theme === "dark" ? searchIconWhite : searchIcon}
         alt="Search Icon"
         onClick={handleSearch}
       />
       <input
         type="text"
-        className={s.searchbar__input}
+        className={`${s.searchbar__input} ${s[theme]}`}
         placeholder="Search the city"
         value={inputValue}
         onChange={handleInputChange}

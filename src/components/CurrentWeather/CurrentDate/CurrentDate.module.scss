@@ -2,5 +2,12 @@
 
 .date {
   font: v.$font-m;
-  color: v.$mainColor;
+  
+  &.light {
+    color: v.$mainColor;
+  }
+
+  &.dark {
+    color: v.$mainLightColor;
+  }
 }

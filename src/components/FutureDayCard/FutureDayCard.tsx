@@ -8,6 +8,7 @@ interface FutureDayCardProps {
   icon: string;
   maxTemp: number;
   minTemp: number;
+  theme: "light" | "dark";
 }
 
 const FutureDayCard: React.FC<FutureDayCardProps> = ({
@@ -15,10 +16,11 @@ const FutureDayCard: React.FC<FutureDayCardProps> = ({
   icon,
   maxTemp,
   minTemp,
+  theme
 }) => {
   return (
     <div className="container">
-      <div className={s.day}>
+      <div className={`${s.day} ${s[theme]}`}>
         <div className={s.day__date}>
           <span className={s.day__name}>{dayjs(date).format("ddd")}</span>
           <span className={s.day__number}>{dayjs(date).format("DD MMMM")}</span>

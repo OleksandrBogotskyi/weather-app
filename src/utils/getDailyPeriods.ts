@@ -19,7 +19,7 @@ export const getDailyPeriods = (weatherData: WeatherData) => {
       period.hours.includes(convertToLocalTime(w.dt, timezoneOffset))
     );
 
-    if (filteredItems.length === 0) {
+    if (!filteredItems.length) {
       return { name: period.name, lists: [] };
     }
 

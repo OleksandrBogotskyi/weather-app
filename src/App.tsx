@@ -11,6 +11,9 @@ function App() {
   const [weatherData, setWeatherData] = useState<Nullable<WeatherData>>(null);
   const [city, setCity] = useState("Kyiv");
   const [error, setError] = useState<Nullable<Error>>(null);
+  const [theme, setTheme] = useState<"light" | "dark">(
+    localStorage.getItem("theme") === "dark" ? "dark" : "light"
+  );
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -27,26 +30,37 @@ function App() {
     fetchWeather();
   }, [city]);
 
+  useEffect(() => {
+    document.body.className = theme; 
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   const hasWeatherData =
     weatherData && weatherData.list && weatherData.list.length > 0;
 
   return (
-    <div className={s.App}>
+    <div className={`${s.App} ${s[theme]}`}>
       <div className={s.App__content}>
         <div className={s.App__container}>
           <NavBar
             city={weatherData?.city.name || city}
             country={weatherData?.city.country || "UA"}
             setCity={setCity}
+            theme={theme}
+            toggleTheme={toggleTheme}
           />
           {error && <p>Error fetching weather data: {error.message}</p>}
           {hasWeatherData ? (
-            <CurrentWeather weatherData={weatherData} />
+            <CurrentWeather weatherData={weatherData} theme={theme}/>
           ) : (
             !error && <p>Loading weather data...</p>
           )}
           <div className={s.App__futureDays}>
-            <FutureDays weatherData={weatherData} />
+            <FutureDays weatherData={weatherData} theme={theme} />
           </div>
         </div>
       </div>

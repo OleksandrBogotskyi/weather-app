@@ -1,46 +1,17 @@
 import React from "react";
 import PeriodList from "./PeriodList/PeriodList";
 import s from "./CurrentPeriodWeather.module.scss";
+import { CurrentPeriodWeatherProps } from "../../types/weather";
 
-interface WeatherMain {
-  temp: number;
-  feels_like: number;
-  pressure: number;
-  humidity: number;
+interface Props extends CurrentPeriodWeatherProps {
+  theme: "light" | "dark";
 }
 
-interface WeatherDescription {
-  icon: string;
-  description: string;
-}
-
-interface Wind {
-  speed: number;
-}
-
-interface PeriodListItem {
-  dt: number;
-  main: WeatherMain;
-  weather: WeatherDescription[];
-  wind: Wind;
-}
-
-interface Period {
-  name: string;
-  lists: PeriodListItem[];
-}
-
-interface CurrentPeriodWeatherProps {
-  period: Period;
-}
-
-const CurrentPeriodWeather: React.FC<CurrentPeriodWeatherProps> = ({
-  period,
-}) => {
+const CurrentPeriodWeather: React.FC<Props> = ({ period, theme }) => {
   const { name, lists } = period;
 
   return (
-    <div className={s.dayPeriod}>
+    <div className={`${s.dayPeriod} ${s[theme]}`}>
       <span className={s.dayPeriod__header}>{name}</span>
       <div className={s.dayPeriod__columns}>
         {lists.length === 2 ? (

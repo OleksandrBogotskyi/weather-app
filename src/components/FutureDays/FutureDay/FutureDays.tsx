@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import FutureDayCard from '../../FutureDayCard/FutureDayCard';
-import { WeatherData, WeatherListItem } from '../../../types/weather';
+import { FutureDayItem, WeatherData, WeatherListItem } from '../../../types/weather';
 import dayjs from "dayjs";
 import { getWeatherIconUrl } from '../../../utils/getWeatherIcon';
+import { Nullable } from '../../../types/narrowTypes';
 
 interface FutureDaysProps {
-  weatherData: WeatherData | null;
+  weatherData: Nullable<WeatherData>;
+  theme: "light" | "dark";
 }
 
-const FutureDays: React.FC<FutureDaysProps> = ({ weatherData }) => {
-  const [days, setDays] = useState<
-    { date: string; icon: string; maxTemp: number; minTemp: number }[]
-  >([]);
+const FutureDays: React.FC<FutureDaysProps> = ({ weatherData, theme }) => {
+  const [days, setDays] = useState<FutureDayItem[]>([]);
 
   useEffect(() => {
     if (!weatherData?.list) return;
@@ -47,6 +47,7 @@ const FutureDays: React.FC<FutureDaysProps> = ({ weatherData }) => {
           icon={day.icon}
           maxTemp={day.maxTemp}
           minTemp={day.minTemp}
+          theme={theme}
         />
       ))}
     </>

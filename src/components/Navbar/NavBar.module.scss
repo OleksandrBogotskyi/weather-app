@@ -8,6 +8,22 @@
 
   &__location {
     font: v.$font-m;
-    color: v.$mainColor;
+
+    &.light {
+      color: v.$mainColor;
+    }
+    
+    &.dark {
+      color: v.$mainLightColor;
+    }
+  }
+
+  &__navigation {
+    @include m.flex(space-between);
+    gap: 15px;
+  }
+
+  &__themeIcon {
+    cursor: pointer;
   }
 }

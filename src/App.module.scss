@@ -4,8 +4,16 @@
 .App {
   width: 100%;
   min-height: 100vh;
-  background-color: v.$mainLightColor;
+  background-color: v.$lightGrey;
   transition: background-color 0.4s ease-in-out;
+
+  &.light {
+    background-color: v.$mainLightColor;
+  }
+
+  &.dark {
+    background-color: v.$mainColor;
+  }
 
   &__content {
     max-width: 1640px;

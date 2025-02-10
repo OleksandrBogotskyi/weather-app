@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import s from "./CurrentDate.module.scss";
 import { getFormattedDate } from "../../../utils/getFormattedDate";
 
-const CurrentDate: React.FC = () => {
+interface CurrentDateProps {
+  theme: "light" | "dark";
+}
+
+const CurrentDate: React.FC<CurrentDateProps> = ({ theme }) => {
   const [date, setDate] = useState<string>(getFormattedDate);
 
   useEffect(() => {
@@ -13,7 +17,7 @@ const CurrentDate: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <span className={s.date}>{date}</span>;
+  return <span className={`${s.date} ${s[theme]}`}>{date}</span>;
 };
 
 export default CurrentDate;
