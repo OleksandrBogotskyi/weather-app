@@ -7,10 +7,9 @@ import { Nullable } from '../../../types/narrowTypes';
 
 interface FutureDaysProps {
   weatherData: Nullable<WeatherData>;
-  theme: "light" | "dark";
 }
 
-const FutureDays: React.FC<FutureDaysProps> = ({ weatherData, theme }) => {
+const FutureDays: React.FC<FutureDaysProps> = ({ weatherData }) => {
   const [days, setDays] = useState<FutureDayItem[]>([]);
 
   useEffect(() => {
@@ -47,7 +46,6 @@ const FutureDays: React.FC<FutureDaysProps> = ({ weatherData, theme }) => {
           icon={day.icon}
           maxTemp={day.maxTemp}
           minTemp={day.minTemp}
-          theme={theme}
         />
       ))}
     </>

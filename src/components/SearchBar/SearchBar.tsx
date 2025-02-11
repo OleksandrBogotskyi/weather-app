@@ -2,15 +2,16 @@ import { useState, FC, KeyboardEvent, ChangeEvent } from "react";
 import s from "./SearchBar.module.scss";
 import searchIcon from "../../assets/images/searchIcon.svg";
 import searchIconWhite from "../../assets/images/searchIconWhite.svg";
+import { useTheme } from "../../context/ThemeContext";
 
 interface SearchBarProps {
   onChange: (city: string) => void;
   initialValue?: string;
-  theme: "light" | "dark";
 }
 
-const SearchBar: FC<SearchBarProps> = ({ onChange, initialValue = "", theme }) => {
+const SearchBar: FC<SearchBarProps> = ({ onChange, initialValue = "" }) => {
   const [inputValue, setInputValue] = useState(initialValue);
+  const { theme } = useTheme();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);

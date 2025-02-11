@@ -2,25 +2,16 @@ import SearchBar from "../SearchBar/SearchBar";
 import lightThemeIcon from "../../assets/images/lightThemeIcon.svg";
 import darkThemeIcon from "../../assets/images/darkThemeIcon.svg";
 import s from "./Navbar.module.scss";
+import { useTheme } from "../../context/ThemeContext";
 
 interface NavBarProps {
   city: string;
   country: string;
   setCity: (city: string) => void;
-  theme: "light" | "dark";
-  toggleTheme: () => void;
 }
 
-export default function NavBar({
-  city,
-  country,
-  setCity,
-  theme,
-  toggleTheme,
-}: NavBarProps) {
-  const handleCityChange = (newCity: string) => {
-    setCity(newCity);
-  };
+export default function NavBar({ city, country, setCity }: NavBarProps) {
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <nav className={`${s.navbar} ${s[theme]}`}>
@@ -34,7 +25,7 @@ export default function NavBar({
           className={s.navbar__themeIcon}
           onClick={toggleTheme}
         />
-        <SearchBar onChange={handleCityChange} theme={theme} />
+        <SearchBar onChange={setCity} />
       </div>
     </nav>
   );

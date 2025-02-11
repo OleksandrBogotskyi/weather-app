@@ -6,14 +6,13 @@ import { WeatherData } from "./types/weather";
 import { Nullable } from "./types/narrowTypes";
 import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import FutureDays from "./components/FutureDays/FutureDay/FutureDays";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
-function App() {
+function AppContent() {
   const [weatherData, setWeatherData] = useState<Nullable<WeatherData>>(null);
   const [city, setCity] = useState("Kyiv");
   const [error, setError] = useState<Nullable<Error>>(null);
-  const [theme, setTheme] = useState<"light" | "dark">(
-    localStorage.getItem("theme") === "dark" ? "dark" : "light"
-  );
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -30,18 +29,6 @@ function App() {
     fetchWeather();
   }, [city]);
 
-  useEffect(() => {
-    document.body.className = theme; 
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
-
-  const hasWeatherData =
-    weatherData && weatherData.list && weatherData.list.length > 0;
-
   return (
     <div className={`${s.App} ${s[theme]}`}>
       <div className={s.App__content}>
@@ -50,17 +37,15 @@ function App() {
             city={weatherData?.city.name || city}
             country={weatherData?.city.country || "UA"}
             setCity={setCity}
-            theme={theme}
-            toggleTheme={toggleTheme}
           />
           {error && <p>Error fetching weather data: {error.message}</p>}
-          {hasWeatherData ? (
-            <CurrentWeather weatherData={weatherData} theme={theme}/>
+          {weatherData ? (
+            <CurrentWeather weatherData={weatherData} />
           ) : (
             !error && <p>Loading weather data...</p>
           )}
           <div className={s.App__futureDays}>
-            <FutureDays weatherData={weatherData} theme={theme} />
+            <FutureDays weatherData={weatherData} />
           </div>
         </div>
       </div>
@@ -68,4 +53,10 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}

@@ -2,12 +2,10 @@ import React from "react";
 import PeriodList from "./PeriodList/PeriodList";
 import s from "./CurrentPeriodWeather.module.scss";
 import { CurrentPeriodWeatherProps } from "../../types/weather";
+import { useTheme } from "../../context/ThemeContext";
 
-interface Props extends CurrentPeriodWeatherProps {
-  theme: "light" | "dark";
-}
-
-const CurrentPeriodWeather: React.FC<Props> = ({ period, theme }) => {
+const CurrentPeriodWeather: React.FC<CurrentPeriodWeatherProps> = ({ period }) => {
+  const { theme } = useTheme(); 
   const { name, lists } = period;
 
   return (

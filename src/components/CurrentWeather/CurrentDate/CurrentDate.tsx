@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import s from "./CurrentDate.module.scss";
 import { getFormattedDate } from "../../../utils/getFormattedDate";
+import { useTheme } from "../../../context/ThemeContext";
 
-interface CurrentDateProps {
-  theme: "light" | "dark";
-}
-
-const CurrentDate: React.FC<CurrentDateProps> = ({ theme }) => {
+const CurrentDate: React.FC = () => {
   const [date, setDate] = useState<string>(getFormattedDate);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const interval = setInterval(() => {

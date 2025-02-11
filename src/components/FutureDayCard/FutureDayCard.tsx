@@ -1,14 +1,14 @@
 import React from "react";
 import dayjs from "dayjs";
-import '../../assets/styles/global.scss';
+import "../../assets/styles/global.scss";
 import s from "./FutureDayCard.module.scss";
+import { useTheme } from "../../context/ThemeContext";
 
 interface FutureDayCardProps {
   date: string;
   icon: string;
   maxTemp: number;
   minTemp: number;
-  theme: "light" | "dark";
 }
 
 const FutureDayCard: React.FC<FutureDayCardProps> = ({
@@ -16,8 +16,9 @@ const FutureDayCard: React.FC<FutureDayCardProps> = ({
   icon,
   maxTemp,
   minTemp,
-  theme
 }) => {
+  const { theme } = useTheme();
+
   return (
     <div className="container">
       <div className={`${s.day} ${s[theme]}`}>

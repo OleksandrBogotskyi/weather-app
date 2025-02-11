@@ -15,14 +15,7 @@
 
   &__temperature {
     font:400 70px/85px 'Open Sans';
-    
-    &.light {
-      color: v.$mainColor;
-    }
-
-    &.dark {
-      color: v.$mainLightColor;
-    }
+    color: var(--text-color);
   }
 }
 

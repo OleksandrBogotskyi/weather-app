@@ -6,15 +6,16 @@ import { getWeatherIconUrl } from "../../utils/getWeatherIcon";
 import CurrentPeriodWeather from "../CurrentPeriodWeather/CurrentPeriodWeather";
 import { getDailyPeriods } from "../../utils/getDailyPeriods";
 import '../../assets/styles/global.scss';
+import { useTheme } from "../../context/ThemeContext";
 
 interface CurrentWeatherProps {
   weatherData: WeatherData;
-  theme: "light" | "dark";
 }
 
 const params = ["Temp, °C", "Feels like", "Pressure, hPa", "Humidity, %", "Wind, km/h"];
 
-const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weatherData, theme }) => {
+const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weatherData }) => {
+  const { theme } = useTheme();
   const currentWeather = weatherData.list[0];
   const iconUrl = getWeatherIconUrl(currentWeather.weather[0].icon);
   const temperature = Math.round(currentWeather.main.temp);
@@ -24,7 +25,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weatherData, theme }) =
     <div className={'container'}>
       <div className={`${s.container} ${s[theme]}`}>
         <div className={s.current}>
-          <CurrentDate theme={theme}/>
+          <CurrentDate />
           <img src={iconUrl} alt={currentWeather.weather[0].description} className={s.current__icon} />
           <p className={`${s.current__temperature} ${s[theme]}`}>
             {temperature > 0 ? `+${temperature}` : temperature}°C
@@ -37,7 +38,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weatherData, theme }) =
         </ul>
         <div className={s.dayPeriods}>
           {dailyPeriods.map((p) => (
-            <CurrentPeriodWeather key={p.name} period={p} theme={theme} />
+            <CurrentPeriodWeather key={p.name} period={p} />
           ))}
         </div>
       </div>
