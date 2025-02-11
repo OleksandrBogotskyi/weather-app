@@ -14,8 +14,8 @@ export default function NavBar({ city, country, setCity }: NavBarProps) {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <nav className={`${s.navbar} ${s[theme]}`}>
-      <span className={`${s.navbar__location} ${s[theme]}`}>
+    <nav className={s.navbar}>
+      <span className={s.navbar__location}>
         {city}, {country}
       </span>
       <div className={s.navbar__navigation}>

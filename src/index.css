@@ -9,6 +9,16 @@
 :root {
   --background: #d4d4d4;
   --text-color: #080338;
+  --border-color: #999999;
+  --white-gradient: linear-gradient(
+    162.91deg,
+    rgba(0, 0, 0, 0.03) -1.68%,
+    rgba(255, 255, 255, 0.093125) 127.54%,
+    rgba(255, 255, 255, 0.112968) 127.56%,
+    rgba(255, 255, 255, 0.111191) 127.57%,
+    rgba(255, 255, 255, 0.15) 127.58%
+  );
+  --secondary-text-color: #686868;
 }
 
 .dark {

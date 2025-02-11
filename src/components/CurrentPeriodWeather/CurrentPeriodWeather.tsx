@@ -2,14 +2,12 @@ import React from "react";
 import PeriodList from "./PeriodList/PeriodList";
 import s from "./CurrentPeriodWeather.module.scss";
 import { CurrentPeriodWeatherProps } from "../../types/weather";
-import { useTheme } from "../../context/ThemeContext";
 
 const CurrentPeriodWeather: React.FC<CurrentPeriodWeatherProps> = ({ period }) => {
-  const { theme } = useTheme(); 
   const { name, lists } = period;
 
   return (
-    <div className={`${s.dayPeriod} ${s[theme]}`}>
+    <div className={s.dayPeriod}>
       <span className={s.dayPeriod__header}>{name}</span>
       <div className={s.dayPeriod__columns}>
         {lists.length === 2 ? (

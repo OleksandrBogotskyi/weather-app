@@ -40,7 +40,7 @@ const SearchBar: FC<SearchBarProps> = ({ onChange, initialValue = "" }) => {
       />
       <input
         type="text"
-        className={`${s.searchbar__input} ${s[theme]}`}
+        className={s.searchbar__input}
         placeholder="Search the city"
         value={inputValue}
         onChange={handleInputChange}

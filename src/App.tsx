@@ -6,13 +6,12 @@ import { WeatherData } from "./types/weather";
 import { Nullable } from "./types/narrowTypes";
 import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import FutureDays from "./components/FutureDays/FutureDay/FutureDays";
-import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function AppContent() {
   const [weatherData, setWeatherData] = useState<Nullable<WeatherData>>(null);
   const [city, setCity] = useState("Kyiv");
   const [error, setError] = useState<Nullable<Error>>(null);
-  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -30,7 +29,7 @@ function AppContent() {
   }, [city]);
 
   return (
-    <div className={`${s.App} ${s[theme]}`}>
+    <div className={s.App}>
       <div className={s.App__content}>
         <div className={s.App__container}>
           <NavBar

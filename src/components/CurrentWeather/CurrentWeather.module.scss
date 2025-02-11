@@ -22,7 +22,7 @@
 .params {
   list-style-type: none;
   padding: 0;
-  color: v.$border;
+  color: var(--border-color);
   font: v.$font-sm;
   min-width: 115px;
   margin-top: auto;

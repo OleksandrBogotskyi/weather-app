@@ -1,9 +1,7 @@
-@use "./variables.scss" as v;
-
 .container {
   padding: 15px;
-  background: v.$whiteCardGradient;
+  background: var(--white-gradient);
   border-radius: 30px;
-  border: 1px solid v.$border;
+  border: 1px solid var(--border-color);
   margin-bottom: 30px;
 }

@@ -7,7 +7,7 @@
   color: var(--text-color);
 
   &:not(:last-child) {
-    border-right: 1px solid v.$darkGrey;
+    border-right: 1px solid var(--secondary-text-color);
   }
 
   &__header {
