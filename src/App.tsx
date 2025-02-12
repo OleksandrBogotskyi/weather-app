@@ -5,8 +5,10 @@ import { getWeatherByCity } from "./API/weather";
 import { WeatherData } from "./types/weather";
 import { Nullable } from "./types/narrowTypes";
 import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
+import FutureDays from "./components/FutureDays/FutureDay/FutureDays";
+import { ThemeProvider } from "./context/ThemeContext";
 
-function App() {
+function AppContent() {
   const [weatherData, setWeatherData] = useState<Nullable<WeatherData>>(null);
   const [city, setCity] = useState("Kyiv");
   const [error, setError] = useState<Nullable<Error>>(null);
@@ -26,32 +28,34 @@ function App() {
     fetchWeather();
   }, [city]);
 
-  const weatherContent = weatherData && weatherData.list && weatherData.list.length > 0 ? (
-    <CurrentWeather weatherData={weatherData} />
-  ) : (
-    !error && <p>Loading weather data...</p>
-  );
-
   return (
     <div className={s.App}>
       <div className={s.App__content}>
         <div className={s.App__container}>
-          {weatherData ? (
-            <NavBar
-              key={weatherData.city.name}
-              city={weatherData.city.name}
-              country={weatherData.city.country}
-              setCity={setCity}
-            />
-          ) : (
-            <NavBar key={city} city={city} country="..." setCity={setCity} />
-          )}
+          <NavBar
+            city={weatherData?.city.name || city}
+            country={weatherData?.city.country || "UA"}
+            setCity={setCity}
+          />
           {error && <p>Error fetching weather data: {error.message}</p>}
-          {weatherContent}
+          {weatherData ? (
+            <CurrentWeather weatherData={weatherData} />
+          ) : (
+            !error && <p>Loading weather data...</p>
+          )}
+          <div className={s.App__futureDays}>
+            <FutureDays weatherData={weatherData} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}

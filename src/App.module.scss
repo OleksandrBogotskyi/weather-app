@@ -4,18 +4,25 @@
 .App {
   width: 100%;
   min-height: 100vh;
-  background-color: v.$mainLightColor;
+  background-color: var(--background);
+  transition: background-color 0.4s ease-in-out;
 
   &__content {
-    max-width: 1440px;
+    max-width: 1640px;
     margin: 0 auto;
     height: 100%;
   }
 
   &__container {
-    max-width: 1240px;
+    max-width: 1440px;
     height: 100%;
     margin: 0 auto;
+  }
+
+  &__futureDays {
+    @include m.flex(space-evenly);
+    flex-wrap: wrap;
+    gap: 30px;
   }
 
 }

@@ -7,6 +7,13 @@ export interface WeatherMain {
   humidity: number;
 }
 
+export interface FutureDayItem {
+  date: string;
+  icon: string;
+  maxTemp: number;
+  minTemp: number;
+}
+
 export interface Weather {
   id: number;
   main: string;
@@ -52,5 +59,21 @@ export interface WeatherData {
   message: number;
   list: WeatherListItem[];
   city: City;
+}
+
+export interface PeriodListItem {
+  dt: number;
+  main: WeatherMain;
+  weather: Weather[];
+  wind: Wind;
+}
+
+export interface Period {
+  name: string;
+  lists: PeriodListItem[];
+}
+
+export interface CurrentPeriodWeatherProps {
+  period: Period;
 }
 

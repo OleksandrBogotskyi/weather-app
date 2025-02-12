@@ -8,6 +8,15 @@
 
   &__location {
     font: v.$font-m;
-    color: v.$mainColor;
+    color: var(--text-color);
+  }
+
+  &__navigation {
+    @include m.flex(space-between);
+    gap: 15px;
+  }
+
+  &__themeIcon {
+    cursor: pointer;
   }
 }

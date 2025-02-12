@@ -1,5 +1,8 @@
 import SearchBar from "../SearchBar/SearchBar";
+import lightThemeIcon from "../../assets/images/lightThemeIcon.svg";
+import darkThemeIcon from "../../assets/images/darkThemeIcon.svg";
 import s from "./Navbar.module.scss";
+import { useTheme } from "../../context/ThemeContext";
 
 interface NavBarProps {
   city: string;
@@ -8,16 +11,22 @@ interface NavBarProps {
 }
 
 export default function NavBar({ city, country, setCity }: NavBarProps) {
-  const handleCityChange = (newCity: string) => {
-    setCity(newCity);
-  };
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <nav className={s.navbar}>
       <span className={s.navbar__location}>
         {city}, {country}
       </span>
-      <SearchBar onChange={handleCityChange}/>
+      <div className={s.navbar__navigation}>
+        <img
+          src={theme === "light" ? darkThemeIcon : lightThemeIcon}
+          alt="Toggle Theme"
+          className={s.navbar__themeIcon}
+          onClick={toggleTheme}
+        />
+        <SearchBar onChange={setCity} />
+      </div>
     </nav>
   );
 }
